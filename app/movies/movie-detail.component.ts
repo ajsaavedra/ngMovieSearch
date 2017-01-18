@@ -28,6 +28,5 @@ export class MovieDetailComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.omdbService.getDetails(null, params['id']))
             .subscribe(movie => { this.movie = movie });
-        this.route.data.subscribe(d => console.log(d));
     }
 }
