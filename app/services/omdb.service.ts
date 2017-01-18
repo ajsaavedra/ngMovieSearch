@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Movie } from './movie';
+import { Movie } from '../movies/movie';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -13,13 +13,8 @@ export class OMDBServiceComponent {
             .map(res => res.json());
     }
 
-    getDetails(movie: Movie = null, id: string = null) {
-        let searchID;
-        if (movie) {
-            searchID = movie.imdbID;
-        } else {
-            searchID = id;
-        }
+    getDetails(movie: any = null, id: string = null) {
+        let searchID = movie ? movie.imdbID : id;
         return this.http.get('http://www.omdbapi.com/?i=' + searchID +
             '&plot=short&r=json').map(res => res.json());
     }
