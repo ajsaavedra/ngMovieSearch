@@ -34,13 +34,13 @@ export class MoviesListComponent {
         this.movies = [];
         this.tmdbService.getMovie(this.searchItem).subscribe(items => {
             for (let movie of items.Search) {
-                this.tmdbService.getDetails(movie).subscribe(movie => {
-                    if (movie.Type === 'movie' && movie.Poster !== 'N/A') {
-                        let newMovie = new Movie(movie.Title, movie.Director, movie.Year,
-                            movie.Genre, movie.Runtime, movie.Rated, movie.Plot, movie.Poster);
-                        this.movies.push(newMovie);
-                    }
-                })
+                if (movie.Type === 'movie' && movie.Poster !== 'N/A') {
+                    this.tmdbService.getDetails(movie).subscribe(movie => {
+                            let newMovie = new Movie(movie.Title, movie.Director, movie.Year,
+                                movie.Genre, movie.Runtime, movie.Rated, movie.Plot, movie.Poster);
+                            this.movies.push(newMovie);
+                    })
+                }
             }
         });
     }
