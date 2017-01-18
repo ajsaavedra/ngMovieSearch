@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TMDBServiceComponent } from './services/tmdb.service';
+import { OMDBServiceComponent } from './services/omdb.service';
 
 @Component({
     selector: 'my-app',
@@ -13,7 +13,7 @@ import { TMDBServiceComponent } from './services/tmdb.service';
         </header>
         <movies-list></movies-list>
     `,
-    providers: [ TMDBServiceComponent ]
+    providers: [ OMDBServiceComponent ]
 })
 
 export class AppComponent{}

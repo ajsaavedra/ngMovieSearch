@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TMDBServiceComponent } from '../services/tmdb.service';
+import { OMDBServiceComponent } from '../services/omdb.service';
 import { Movie } from './movie';
 
 @Component({
@@ -28,7 +28,7 @@ export class MoviesListComponent {
     imageWidth: number = 100;
     imageMargin: number = 2;
 
-    constructor(private tmdbService: TMDBServiceComponent) {}
+    constructor(private tmdbService: OMDBServiceComponent) {}
 
     searchMovie() {
         this.movies = [];

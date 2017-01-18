@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class TMDBServiceComponent {
+export class OMDBServiceComponent {
     constructor(private http: Http) {}
 
     getMovie(title: string) {
