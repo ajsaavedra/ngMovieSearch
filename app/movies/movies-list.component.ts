@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TMDBServiceComponent } from '../services/tmdb.service';
+import { Movie } from './movie';
 
 @Component({
     selector: 'movies-list',
@@ -7,27 +8,42 @@ import { TMDBServiceComponent } from '../services/tmdb.service';
     styles: [`
         .search {
             color: black;
+            font-size: 20px;
+        }
+        tr {
+            background-color: #F7F7F9;
+        }
+        button {
+            font-size: 14px;
         }
     `]
 })
 
 export class MoviesListComponent {
-    movies: any[];
+    searchResult: any[];
+    movies: Movie[] = [];
     images: any[];
     searchItem: string;
-    showImages: boolean = false;
+    showImage: boolean = false;
+    imageWidth: number = 100;
+    imageMargin: number = 2;
 
     constructor(private tmdbService: TMDBServiceComponent) {}
 
     searchMovie() {
-        this.tmdbService.getMovie(this.searchItem)
-                .subscribe(movie => { 
-                    this.movies = movie.Search; 
-                }
-        );
+        this.movies = [];
+        this.tmdbService.getMovie(this.searchItem).subscribe(items => {
+            for (let movie of items.Search) {
+                this.tmdbService.getDetails(movie).subscribe(movie => {
+                    let newMovie = new Movie(movie.Title, movie.Director, movie.Year,
+                        movie.Genre, movie.Runtime, movie.Rated, movie.Plot, movie.Poster);
+                    this.movies.push(newMovie);
+                })
+            }
+        });
     }
 
-    toggleImages() {
-        this.showImages = !this.showImages;
+    toggleImage() {
+        this.showImage = !this.showImage;
     }
 }

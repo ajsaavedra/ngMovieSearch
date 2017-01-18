@@ -7,9 +7,13 @@ export class TMDBServiceComponent {
     constructor(private http: Http) {}
 
     getMovie(title: string) {
-        return this.http
-            .get('http://www.omdbapi.com/?s=' + title.replace(" ", "+") +
-                     '&y=&plot=short&r=json')
+        return this.http.get('http://www.omdbapi.com/?s=' +
+            title.replace(" ", "+") + '&y=&plot=short&r=json')
             .map(res => res.json());
+    }
+
+    getDetails(movie) {
+        return this.http.get('http://www.omdbapi.com/?i=' + movie.imdbID +
+            '&plot=short&r=json').map(res => res.json());
     }
 }

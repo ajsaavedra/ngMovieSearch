@@ -3,17 +3,16 @@
         <input class='search' type='text' 
             [(ngModel)]='searchItem' (keyup)='searchMovie()'
             placeholder='Search for a movie...'/>
+        <button class='btn btn-info pull-right' (click)='toggleImage()'>
+            {{ showImage ? 'Hide' : 'Show' }} Poster
+        </button>
     </div>
     <div class='panel-body' *ngIf='movies'>
         <div class='table-responsive'>
             <table class='table'>
                 <thead>
                     <tr>
-                        <th>
-                            <button class='btn btn-primary' (click)='toggleImages()'>
-                                {{ showImages ? 'Hide' : 'Show' }} Poster
-                            </button>
-                        </th>
+                        <th *ngIf='showImage'></th>
                         <th>Title</th>
                         <th>Release Date</th>
                         <th>Director</th>
@@ -24,9 +23,17 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let movie of movies'>
-                        <td></td>
-                        <td>{{ movie.Title }}</td>
-                        <td>{{ movie.Year }}</td>
+                        <td *ngIf='showImage'>
+                            <img [src]='movie.posterUrl'
+                            [style.width.px]='imageWidth'
+                            [style.margin.px]='imageMargin'>
+                        </td>
+                        <td>{{ movie.title }}</td>
+                        <td>{{ movie.releaseDate }}</td>
+                        <td>{{ movie.director }}</td>
+                        <td>{{ movie.genre }}</td>
+                        <td>{{ movie.runtime }}</td>
+                        <td>{{ movie.rating }}</td>
                     </tr>
                 </tbody>
             </table>

@@ -5,7 +5,7 @@ import { TMDBServiceComponent } from './services/tmdb.service';
     selector: 'my-app',
     template: `
         <header>
-            <nav class="navbar navbar-primary">
+            <nav class="navbar navbar-default">
                 <div class="navbar-header">
                     <a href="/" class="navbar-brand">ngMovieSearch</a>
                 </div>
