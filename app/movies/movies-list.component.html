@@ -1,7 +1,7 @@
 <div class='panel panel-primary'>
     <div class='panel-heading'>
         <input class='search' type='text' 
-            [(ngModel)]='searchItem' (keyup)='searchMovie()'
+            [(ngModel)]='searchItem' (keyup)='keystrokeListener()'
             placeholder='Search for a movie...'/>
         <button class='btn btn-info pull-right' (click)='toggleImage()'>
             {{ showImage ? 'Hide' : 'Show' }} Poster

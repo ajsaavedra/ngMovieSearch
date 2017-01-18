@@ -27,15 +27,23 @@ export class MoviesListComponent {
     showImage: boolean = false;
     imageWidth: number = 100;
     imageMargin: number = 2;
+    timeout;
 
-    constructor(private tmdbService: OMDBServiceComponent) {}
+    constructor(private omdbService: OMDBServiceComponent) {}
+
+    keystrokeListener() {
+        if (this.timeout) { clearTimeout(this.timeout); }
+        this.timeout = setTimeout(() => {
+            this.searchMovie();
+        }, 500);
+    }
 
     searchMovie() {
         this.movies = [];
-        this.tmdbService.getMovie(this.searchItem).subscribe(items => {
+        this.omdbService.getMovie(this.searchItem).subscribe(items => {
             for (let movie of items.Search) {
                 if (movie.Type === 'movie' && movie.Poster !== 'N/A') {
-                    this.tmdbService.getDetails(movie).subscribe(movie => {
+                    this.omdbService.getDetails(movie).subscribe(movie => {
                             let newMovie = new Movie(movie.Title, movie.Director, movie.Year,
                                 movie.Genre, movie.Runtime, movie.Rated, movie.Plot, movie.Poster);
                             this.movies.push(newMovie);
