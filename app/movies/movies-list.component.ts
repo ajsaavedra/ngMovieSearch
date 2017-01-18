@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OMDBServiceComponent } from '../services/omdb.service';
 import { Movie } from './movie';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'movies-list',
@@ -20,16 +21,14 @@ import { Movie } from './movie';
 })
 
 export class MoviesListComponent {
-    searchResult: any[];
     movies: Movie[] = [];
-    images: any[];
     searchItem: string;
     showImage: boolean = false;
-    imageWidth: number = 100;
+    imageWidth: number = 150;
     imageMargin: number = 2;
-    timeout;
+    timeout = null;
 
-    constructor(private omdbService: OMDBServiceComponent) {}
+    constructor(private omdbService: OMDBServiceComponent, private router: Router) {}
 
     keystrokeListener() {
         if (this.timeout) { clearTimeout(this.timeout); }
@@ -44,7 +43,7 @@ export class MoviesListComponent {
             for (let movie of items.Search) {
                 if (movie.Type === 'movie' && movie.Poster !== 'N/A') {
                     this.omdbService.getDetails(movie).subscribe(movie => {
-                            let newMovie = new Movie(movie.Title, movie.Director, movie.Year,
+                            let newMovie = new Movie(movie.imdbID, movie.Title, movie.Director, movie.Year,
                                 movie.Genre, movie.Runtime, movie.Rated, movie.Plot, movie.Poster);
                             this.movies.push(newMovie);
                     })

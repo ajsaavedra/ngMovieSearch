@@ -24,9 +24,9 @@
                 <tbody>
                     <tr *ngFor='let movie of movies'>
                         <td *ngIf='showImage'>
-                            <img [src]='movie.posterUrl'
+                            <a [routerLink]="['movie-detail', movie.id]"><img [src]='movie.posterUrl'
                             [style.width.px]='imageWidth'
-                            [style.margin.px]='imageMargin'>
+                            [style.margin.px]='imageMargin'></a>
                         </td>
                         <td>{{ movie.title }}</td>
                         <td>{{ movie.releaseDate }}</td>

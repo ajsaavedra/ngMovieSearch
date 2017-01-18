@@ -11,7 +11,7 @@ import { OMDBServiceComponent } from './services/omdb.service';
                 </div>
             </nav>
         </header>
-        <movies-list></movies-list>
+        <router-outlet></router-outlet>
     `,
     providers: [ OMDBServiceComponent ]
 })
